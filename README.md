@@ -139,3 +139,34 @@ Or use the included deployment script:
 ```bash
 ./deploy.sh
 ```
+
+## JITUI Framework Integration (Just-In-Time UI)
+
+This app can generate UI using the JITUI framework for workflow-driven, AI-native UIs. See the framework repo and docs: [JITUI monorepo](https://github.com/vivek100/JITUI).
+
+### Clone and build JITUI (PowerShell)
+
+```powershell
+Set-Location $env:USERPROFILE\Desktop\projects
+git clone https://github.com/vivek100/JITUI.git
+Set-Location .\JITUI
+pnpm install
+pnpm -r build
+```
+
+After building, you can import packages in your generated apps:
+
+```ts
+import { JITUIProvider, JitLayout } from "@jitui/renderer";
+import { useJitStore } from "@jitui/state";
+```
+
+Key concepts: Action Registry, generative UI via chat, background/sub-agents, and workflow-driven layouts. Refer to package docs in that repo for details.
+
+### Morph fast edits in the main agent
+
+When `MORPH_API_KEY` is set, the main Mastra agent exposes a Morph `edit_file` tool for precise code edits. The tool applies minimal diffs with `// ... existing code ...` separators. No extra setup needed beyond the env var; it is registered automatically during streaming.
+
+### Notes
+
+- The agent prompt is tuned to prefer JITUI patterns (actions are serializable, components rendered via layout/state updates) and to use Morph for code changes when available.

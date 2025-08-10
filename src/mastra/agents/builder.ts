@@ -4,6 +4,8 @@ import { Agent } from "@mastra/core/agent";
 import { Memory } from "@mastra/memory";
 import { PostgresStore, PgVector } from "@mastra/pg";
 import { todoTool } from "@/tools/todo-tool";
+import { morphTool } from "@/tools/morph-tool";
+import { FreestyleDevServerFilesystem } from "freestyle-sandboxes";
 
 export const memory = new Memory({
   options: {
@@ -31,3 +33,15 @@ export const builderAgent = new Agent({
     update_todo_list: todoTool,
   },
 });
+
+// Attach Morph edit_file tool at runtime when MORPH_API_KEY is present.
+// We pass the FreestyleDevServerFilesystem instance from the active dev server context.
+export function registerMorphTool(fs: FreestyleDevServerFilesystem) {
+  if (process.env.MORPH_API_KEY) {
+    builderAgent.registerTools({
+      morph: {
+        edit_file: morphTool(fs),
+      },
+    });
+  }
+}

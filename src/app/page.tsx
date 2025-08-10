@@ -34,7 +34,7 @@ export default function Home() {
       <main className="min-h-screen p-4 relative">
         <div className="flex w-full justify-between items-center">
           <h1 className="text-lg font-bold flex-1 sm:w-80">
-            <a href="https://www.freestyle.sh">freestyle.sh</a>
+            Just‑in‑time app builder
           </h1>
           <Image
             className="dark:invert mx-2"
@@ -50,13 +50,13 @@ export default function Home() {
 
         <div>
           <div className="w-full max-w-lg px-4 sm:px-0 mx-auto flex flex-col items-center mt-16 sm:mt-24 md:mt-32 col-start-1 col-end-1 row-start-1 row-end-1 z-10">
-            <p className="text-neutral-600 text-center mb-6 text-3xl sm:text-4xl md:text-5xl font-bold">
-              Let AI Cook
+            <p className="text-neutral-700 text-center mb-6 text-3xl sm:text-4xl md:text-5xl font-bold">
+              Build apps just‑in‑time
             </p>
 
             <div className="w-full relative my-5">
               <div className="relative w-full max-w-full overflow-hidden">
-                <div className="w-full bg-accent rounded-md relative z-10 border transition-colors">
+                 <div className="w-full bg-white/60 rounded-md relative z-10 border transition-colors backdrop-blur-sm">
                   <PromptInput
                     leftSlot={
                       <FrameworkSelector
@@ -79,9 +79,7 @@ export default function Home() {
                         disabled={isLoading || !prompt.trim()}
                         className="h-7 text-xs"
                       >
-                        <span className="hidden sm:inline">
-                          Start Creating ⏎
-                        </span>
+                         <span className="hidden sm:inline">Start Creating ⏎</span>
                         <span className="sm:hidden">Create ⏎</span>
                       </Button>
                     </PromptInputActions>
