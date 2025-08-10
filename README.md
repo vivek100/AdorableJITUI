@@ -2,9 +2,9 @@
   <img src="icon.png" alt="description" width="75">
 </p>
 
-# Adorable
+# Adorable — Just‑in‑time app builder
 
-Open-source version of **Lovable** - an AI agent that can make websites and apps through a chat interface.
+Open-source, just‑in‑time AI app builder that creates apps through a chat interface. Minimal, workflow‑driven UI with precise code edits.
 
 For guidance on building app builders with AI, see the [Freestyle guide on Building an App Builder](https://docs.freestyle.sh/guides/app-builder).
 
@@ -14,6 +14,18 @@ For guidance on building app builders with AI, see the [Freestyle guide on Build
 - Patch-based code editing with user approval
 - Git integration for version control
 - Preview capabilities for code changes
+
+## Quickstart (PowerShell)
+
+```powershell
+git clone https://github.com/freestyle-sh/adorable
+cd adorable
+npm install
+npx drizzle-kit push
+npm run dev
+```
+
+Then open http://localhost:3000
 
 ## Setup Instructions
 
@@ -139,6 +151,45 @@ Or use the included deployment script:
 ```bash
 ./deploy.sh
 ```
+
+## Branding & UI
+
+- Title/metadata updated to reflect Just‑in‑time builder (`src/app/layout.tsx`).
+- Hero heading changed to “Build apps just‑in‑time” (`src/app/page.tsx`).
+- Subtle background tint applied via CSS variable `--jit-bg` (`src/app/globals.css`). Tweak it to adjust the look.
+
+```css
+/* src/app/globals.css */
+:root { --jit-bg: oklch(0.985 0 0); }
+body { background-color: var(--jit-bg); }
+```
+
+## JITUI Framework Integration (Just‑in‑time UI)
+
+This app can generate UI using the JITUI framework for workflow-driven, AI-native UIs. See the framework repo and docs: [JITUI monorepo](https://github.com/vivek100/JITUI).
+
+### Clone and build JITUI (PowerShell)
+
+```powershell
+Set-Location $env:USERPROFILE\Desktop\projects
+git clone https://github.com/vivek100/JITUI.git
+Set-Location .\JITUI
+pnpm install
+pnpm -r build
+```
+
+After building, you can import packages in your generated apps:
+
+```ts
+import { JITUIProvider, JitLayout } from "@jitui/renderer";
+import { useJitStore } from "@jitui/state";
+```
+
+Key concepts: Action Registry, generative UI via chat, background/sub‑agents, and workflow‑driven layouts. Refer to the package docs in that repo for details.
+
+### Morph fast edits in the main agent
+
+When `MORPH_API_KEY` is set, the main Mastra agent exposes a Morph `edit_file` tool for precise code edits. The tool applies minimal diffs with `// ... existing code ...` separators. No extra setup needed beyond the env var; it is registered automatically during streaming.
 
 ## JITUI Framework Integration (Just-In-Time UI)
 
